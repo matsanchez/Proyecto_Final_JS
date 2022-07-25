@@ -3,60 +3,60 @@
         "id": 1,
         "name": "Bolsa Ecologica",
         "price": "50",
-        "img": "../../img/merchandising/bolsaeco.png"
+        "img": "../img/merchandising/bolsaeco.png"
     },
     {
         "id": 2,
         "name": "Cuaderno",
         "price": "500",
-        "img": "../../img/merchandising/cuaderno.png"
+        "img": "../img/merchandising/cuaderno.png"
     },
     {
         "id": 3,
         "name": "Gorra",
         "price": "800",
-        "img": "../../img/merchandising/gorra.png"
+        "img": "../img/merchandising/gorra.png"
     },
     {
         "id": 4,
         "name": "Mate",
         "price": "500",
-        "img": "../../img/merchandising/mate.png"
+        "img": "../img/merchandising/mate.png"
     },
     {
         "id": 5,
         "name": "Matera",
         "price": "1500",
-        "img": "../../img/merchandising/matera.png"
+        "img": "../img/merchandising/matera.png"
     },
     {
         "id": 6,
         "name": "Mochila",
         "price": "2500",
-        "img": "../../img/merchandising/mochila.png"
+        "img": "../img/merchandising/mochila.png"
     },
     {
         "id": 7,
         "name": "Porta Notebook",
         "price": "1800",
-        "img": "../../img/merchandising/portanotebook.png"
+        "img": "../img/merchandising/portanotebook.png"
     },
     {
         "id": 8,
         "name": "Remera",
         "price": "3000",
-        "img": "../../img/merchandising/remera.png"
+        "img": "../img/merchandising/remera.png"
     },
     {
         "id": 9,
         "name": "Termo",
         "price": "6000",
-        "img": "../../img/merchandising/termo.png"
+        "img": "../img/merchandising/termo.png"
     },
     {
         "id": 10,
         "name": "Articulos de Oficina",
         "price": "1500",
-        "img": "../../img/merchandising/varios.png"
+        "img": "../img/merchandising/varios.png"
     }
 ]
