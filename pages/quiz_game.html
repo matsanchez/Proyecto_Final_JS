@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="Juegos, Ahorcado, Quiz, Preguntas, Memoria"><!-- SEO Palabras Claves -->
+  <meta name="description" content="Pasatiempo para entrenar nuestro cerebro"><!-- SEO Descripcion del sitio -->
+  <link rel="shortcut icon" href="../img/icons/favicon.ico" type="image/x-icon"><!-- Link Favicon -->
+  <link rel="icon" href="../img/icons/favicon.ico" type="image/x-icon"><!-- Link Favicon -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- CSS Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+  <!-- Icons Bootstrap -->
+  <link rel="stylesheet" href="../css/style.css"><!-- Estilos propios -->
+  <title>JUEGO DE PREGUNTAS / QuiZplay</title>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-light mb-4" style="--bs-bg-opacity: .3;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="home.html">
+        <img src="../img/logomenu.png" class="logoMenu" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">JUEGOS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">MERCHANDISING</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ranking.html">RANKING Quiz</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contacto.html">CONTACTO</a>
+          </li>
+        </ul>
+        <div class="d-flex me-4 text-warning"><span id="user_login"></span></div>
+        <div class="d-flex">
+          <a href="shop_cart.html"><span id="cartCounter"></span>
+            <img src="../img/icons/cart.png" class="iconCart" alt="Carrito de Compra">
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div id="rules"></div><!-- Reglas del Juego -->
+  <div class="title text-center d-none"><img src="../img/title_section/header_themes_quiz.png" class="mt-3"
+      alt="Temas de preguntas"></div><!-- Titulo Seccion -->
+  <div id="themes" class="themes_quiz col-lg-12 container mt-4 d-none"></div><!-- Tematicas de las preguntas -->
+  <div class="view_quiz view_desactive container">
+    <!-- Game Quiz Contenedor -->
+    <div
+      class="boxQuiz bg-light p-4 rounded-3 shadow border border-warning col-lg-6 position-absolute top-50 start-50 translate-middle container">
+      <div class="boxTop">
+        <div class="titleQuiz"></div>
+        <div class="timer">
+          <div id="timerText" class="timerText">Tic Tac</div>
+          <div id="timerNumber" class="timerNumber"></div>
+        </div>
+      </div>
+      <div id="showQuiz">
+        <div id="question" class="question bg-warning"></div>
+        <div id="options">
+          <div class="option" id="0"></div>
+          <div class="option" id="1"></div>
+          <div class="option" id="2"></div>
+          <div class="option" id="3"></div>
+        </div>
+      </div>
+      <div id="score" class="score container mt-2"></div>
+      <div id="count"></div>
+      <button id="clouse_quiz" class="btn-info mt-3 p-2 container">SALIR</button>
+    </div>
+  </div>
+  <div id="info_score"></div>
+  <footer class="bg-light" style="--bs-bg-opacity: .3;">
+    <div class="text-center">
+      <p class="text-center text-light mt-4">© 2022 Proyecto Final Javascript - Desarrollo por Matias Sanchez</p>
+      <a href="https://www.linkedin.com/in/mmatsanchez"><img src="../img/icons/icon_linkedin.png" class="mb-3 shadow"
+          alt="Perfi Linkedin"></a>
+    </div>
+  </footer>
+  <!-- JS Preguntas de los Quiz -->
+  <script src="../js/quiz/questions.js"></script>
+  <!-- JS funciones -->
+  <script src="../js/quiz/main.js"></script>
+  <!-- Libreria Sweet Alert -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
