@@ -1,9 +1,4 @@
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let users = JSON.parse(localStorage.getItem('users')) || [];
-
-const DOMuser_login = document.getElementById('user_login').innerHTML = `Hola ${users[5].name} 😃`;
-const DOMcartCounter = document.getElementById('cartCounter');
-cart.length === 0 ? DOMcartCounter.innerHTML = cart.length + 0 : DOMcartCounter.innerHTML = cart.length;
+/* Despliegue del formulario HTML */
 const DOMform_contact = document.querySelector('.form_contact').innerHTML = `
                                                             <div class="text-center"><img src="../img/title_section/header_contact.png" class="mt-2" alt="Titulo Contacto"></div>
                                                             <form id="form" class="row">
@@ -31,41 +26,45 @@ const DOMform_contact = document.querySelector('.form_contact').innerHTML = `
                                                             </form>
                                                                 `;
 
+/* Expresiones regulares para validacion del formulario */
 const expReg = { user: /^[a-zA-ZÀ-ÿ\s]{1,30}$/, email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/, message: /^[^$%&|<>#]{50,1000}$/ };
-
 const inputs = { name: false, email: false, message: false };
 
+/* Funcion para validar el formulario */
 function validateForm(e) {
     e.stopPropagation();
     switch (e.target.name) {
         case "name":
-            validateInputs(expReg.user, e.target, 'name')
+            validateInputs(expReg.user, e.target, 'name');
             break;
         case "email":
-            validateInputs(expReg.email, e.target, 'email')
+            validateInputs(expReg.email, e.target, 'email');
             break;
         case "message":
-            validateInputs(expReg.message, e.target, 'message')
+            validateInputs(expReg.message, e.target, 'message');
             break;
-    }
-}
+    };
+};
 
+/* Funcion para validar los inputs ingresados */
 function validateInputs(expression, input, field) {
     if (expression.test(input.value)) {
         document.querySelector(`#validate_${field} .msg_error`).classList.remove('msg_error_active');
         inputs[field] = true;
     } else {
         document.querySelector(`#validate_${field} .msg_error`).classList.add('msg_error_active');
-        inputs[field] = false
-    }
-}
+        inputs[field] = false;
+    };
+};
 
+/* Eventos de los inputs para la validacion y mensaje de error */
 const DOMinputs = document.querySelectorAll('.inputs');
 DOMinputs.forEach((inputs) => {
     inputs.addEventListener('keyup', validateForm);
     inputs.addEventListener('blur', validateForm);
 });
 
+/* Evento boton Enviar y validacion por medio de la api EMAILJS */
 document.querySelector('.submit_form').addEventListener('click', ((e) => {
     e.stopPropagation();
     if (inputs.name && inputs.email && inputs.message) {

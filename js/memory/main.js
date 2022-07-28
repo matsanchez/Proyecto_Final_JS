@@ -1,15 +1,7 @@
-/* Local Storage */
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let users = JSON.parse(localStorage.getItem('users')) || [];
-
-/* Iniciadores de DOM */
-const DOMuser_login = document.getElementById('user_login').innerHTML = `Hola ${users[5].name} 😃`;
-const DOMcartCounter = document.getElementById('cartCounter');
-cart.length === 0 ? DOMcartCounter.innerHTML = cart.length + 0 : DOMcartCounter.innerHTML = cart.length;
-const DOMboxGame = document.getElementById('boxGame');
-const DOMmovements = document.getElementById('movements');
-const DOMhits = document.getElementById('hits');
-const DOMtime_left = document.getElementById('time_left');
+const DOMboxGame = getId('boxGame');
+const DOMmovements = getId('movements');
+const DOMhits = getId('hits');
+const DOMtime_left = getId('time_left');
 const DOMrules = document.querySelector('.rules').innerHTML = `<div class="p_rules_game text-center p-3 bg-light rounded  container col-xxl-5 col-xl-6 col-lg-7" style="--bs-bg-opacity: .3;">
                                                                     <img src="../img/headers_games/header_memory.png" class="container mb-3" alt="">
                                                                     <p><i class="bi bi-check-square-fill me-3"></i>TENES 3 SEGUNDOS PARA MEMORIZAR LAS IMAGENES.</p>
@@ -57,7 +49,7 @@ function countTime() {
 /* Configuracion al finalizar el tiempo, muestra la ubicacion de las imagenes */
 function blockGameMemory() {
     for (let i = 0; i < ids.length; i++) {
-        const element = document.getElementById(i);
+        const element = getId(i);
         element.classList.remove('bg_card_memory');
         element.innerHTML = `<img src="../img/cards_game_memory/${imgThemes[0]}/${cards[i]}.png" alt="Card" class="cards_game_memory">`;
         element.disabled = true;
@@ -74,45 +66,39 @@ function showGameMemory() {
                     <div id=${[i]} class="btn_memory m-1 bg_card_memory"></div>
                     `;
         DOMboxGame.innerHTML += card;
-        const element = document.getElementById(i);
+        const element = getId(i);
         element.classList.remove('bg_card_memory');
         element.innerHTML = `<img src="../img/cards_game_memory/${imgThemes[0]}/${cards[i]}.png" alt="Card" class="cards_game_memory">`;
         element.disabled = true;
-        element.classList.add('btn_memory_block')
+        element.classList.add('btn_memory_block');
         setTimeout(() => { /* Aca configuramos el tiempo que las tarjetas se visualizan y se inicia el juego */
-            const element = document.getElementById(i);
+            const element = getId(i);
             element.classList.add('bg_card_memory');
             element.innerHTML = "";
             element.disabled = false;
-            element.classList.remove('btn_memory_block')
-        }, 2000)
-    }
-
-}
+            element.classList.remove('btn_memory_block');
+        }, 2000);
+    };
+};
 document.addEventListener('click', ((e) => {
     if (e.target && e.target.matches('div.btn_memory')) {
         selectCar(e.target.id);
-    }
-}))
+    };
+}));
 
 /* Configuracion cuando selecciona la tarjeta y luego la otra */
 function selectCar(idDiv) {
-
-    if (timer == false) {
-        countTime();
-        timer = true;
-    }
+    timer == false && (countTime(), timer = true);
     showSelect++;
-
     if (showSelect == 1) {
-        selectCard1 = document.getElementById(idDiv);
+        selectCard1 = getId(idDiv);
         selectCard1.classList.remove('bg_card_memory');
         firstShow = cards[idDiv];
         selectCard1.innerHTML = `<img src="../img/cards_game_memory/${imgThemes[0]}/${firstShow}.png" alt="Card" class="cards_game_memory">`;
         selectCard1.disabled = true;
 
     } else if (showSelect == 2) {
-        selectCard2 = document.getElementById(idDiv);
+        selectCard2 = getId(idDiv);
         selectCard2.classList.remove('bg_card_memory');
         secondShow = cards[idDiv];
         selectCard2.innerHTML = `<img src="../img/cards_game_memory/${imgThemes[0]}/${secondShow}.png" alt="Card" class="cards_game_memory">`;
@@ -126,10 +112,11 @@ function selectCar(idDiv) {
             DOMhits.innerHTML = `ACIERTOS<br>${hits}`;
 
             if (hits == 8) {
-                document.querySelector('.view_game_memory').classList.add('d-none')
+                document.querySelector('.view_game_memory').classList.add('d-none');
                 clearInterval(countDown);
                 msjWin();
-            }
+            };
+
         } else {
             setTimeout(() => {
                 selectCard1.innerHTML = "";
@@ -139,10 +126,10 @@ function selectCar(idDiv) {
                 showSelect = 0;
                 selectCard1.classList.add('bg_card_memory');
                 selectCard2.classList.add('bg_card_memory');
-            }, 700)
-        }
-    }
-}
+            }, 700);
+        };
+    };
+};
 
 /* Configuracion mensaje cuando gana el Juego */
 function msjWin() {
@@ -176,8 +163,8 @@ function msjWin() {
         reverseButtons: true
     }).then((result) => {
         result.isConfirmed ? replayGame() : location.href = "home.html";
-    })
-}
+    });
+};
 
 /* Configuracion mensaje cuando se termina el tiempo */
 function whenFinishTime() {
@@ -214,4 +201,4 @@ function replayGame() {
     initTime = timerTime;
     countDown = 0;
     showGameMemory();
-}
+};

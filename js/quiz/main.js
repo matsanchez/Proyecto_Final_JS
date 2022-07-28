@@ -1,9 +1,3 @@
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let users = JSON.parse(localStorage.getItem('users')) || [];
-
-const DOMuser_login = document.getElementById('user_login').innerHTML = `Hola ${users[5].name} 😃`
-const DOMcartCounter = document.getElementById('cartCounter');
-cart.length === 0 ? DOMcartCounter.innerHTML = cart.length + 0 : DOMcartCounter.innerHTML = cart.length;
 const DOMshowQuiz = document.getElementById('showQuiz');
 const DOMtitleQuiz = document.querySelector('.titleQuiz');
 const DOMtimerText = document.getElementById('timerText');
@@ -17,8 +11,9 @@ const DOMoption_3 = document.getElementById('2');
 const DOMoption_4 = document.getElementById('3');
 const DOMbtnClose = document.getElementById('clouse_quiz').addEventListener('click', close = () => {
     location.assign('./quiz_game.html');
-})
+});
 
+/* Despliegue de las Reglas del Juego */
 const DOMrules = document.getElementById('rules').innerHTML =
     `<div class="p_rules_game text-center p-3 bg-light rounded  container col-xxl-5 col-xl-6 col-lg-7" style="--bs-bg-opacity: .3;">
                                                                     <img src="../img/headers_games/header_quiz.png" class="container mb-3" alt="">
@@ -27,8 +22,10 @@ const DOMrules = document.getElementById('rules').innerHTML =
                                                                     <p><i class="bi bi-check-square-fill me-3"></i>AL FINALIZAR EL JUEGO, NO TENDRAS POSIBILIDAD DE VER LA RESPUESTA CORRECTA</p>
                                                                     <p><i class="bi bi-check-square-fill me-3"></i>SI ESTAS PREPARADO/A PULSA JUGAR Y VAMOS A ELEGIR LA TEMÁTICA</p>
                                                                     <button class="goGame btn btn-danger px-5 shadow">JUGAR!</button>
-                                                                </div>`
-document.addEventListener('click', ((e) => { if (e.target && e.target.matches('button.goGame')) { init() } }))
+                                                                </div>`;
+
+/* Boton para avanzar a las tematicas para jugar */
+document.addEventListener('click', ((e) => { if (e.target && e.target.matches('button.goGame')) { initQuiz() } }));
 const DOMthemes = document.getElementById('themes').innerHTML =
     `<div class="text-center container">
     <img src="../img/themes_quiz/arte_literatura.jpg" alt="Arte y Literatura" id="3" class="btn_theme" name="arte_y_literatura">
@@ -38,17 +35,20 @@ const DOMthemes = document.getElementById('themes').innerHTML =
     <img src="../img/themes_quiz/natur_ciencia.jpg" alt="Naturaleza y Ciencia" id="1" class="btn_theme" name="naturaleza_y_ciencia">
 </div>`;
 
-function init() {
+/* Funcion para Ocultar las reglas y mostrar las tematicas para comenzar a jugar */
+function initQuiz() {
     document.getElementById('rules').classList.toggle('d-none');
     document.getElementById('themes').classList.toggle('d-none');
     document.querySelector('.title').classList.toggle('d-none');
-}
+};
+
 const DOMbtnsThemes = document.querySelectorAll('.btn_theme');
 DOMbtnsThemes.forEach((btn) => {
     btn.addEventListener('click', choiceTheme);
     btn.addEventListener('click', viewQuiz);
 });
 
+/* Funcion mensaje de carga y para ocultar la tematica */
 function viewQuiz() {
     let timerInterval;
     Swal.fire({
@@ -72,36 +72,38 @@ function viewQuiz() {
             DOMviewQuiz = document.querySelector('.view_quiz').setAttribute('class', 'view_active');
             DOMheaderThemes = document.getElementById('themes').setAttribute('class', 'view_desactive');
             document.querySelector('.title').classList.toggle('d-none');
-        }
-    })
-}
+        };
+    });
+};
 
+/* Funcion para identificar el tema elegido */
 function choiceTheme(e) {
     e.stopPropagation();
     switch (e.target.name) {
         case "arte_y_literatura":
-            getId(e.target.id)
-            loadQuestion(indexQuestion, e.target.id)
+            getId(e.target.id); /* Obtengo el id para cargar el titulo de la tematica */
+            loadQuestion(indexQuestion, e.target.id); /* Funcion para dirigir la tematica y obtenga las preguntas/opciones */
             break;
         case "entretenimiento":
-            getId(e.target.id)
-            loadQuestion(indexQuestion, e.target.id)
+            getId(e.target.id);
+            loadQuestion(indexQuestion, e.target.id);
             break;
         case "geografia":
-            getId(e.target.id)
-            loadQuestion(indexQuestion, e.target.id)
+            getId(e.target.id);
+            loadQuestion(indexQuestion, e.target.id);
             break;
         case "historia":
-            getId(e.target.id)
-            loadQuestion(indexQuestion, e.target.id)
+            getId(e.target.id);
+            loadQuestion(indexQuestion, e.target.id);
             break;
         case "naturaleza_y_ciencia":
-            getId(e.target.id)
-            loadQuestion(indexQuestion, e.target.id)
+            getId(e.target.id);
+            loadQuestion(indexQuestion, e.target.id);
             break;
-    }
-}
+    };
+};
 
+/* Variables del Juego QUIZ */
 let timeValue = 15;
 let timeRest = timeValue;
 let timeScore = 0;
@@ -115,21 +117,24 @@ let themesTitle = [
     "Historia", "Naturaleza y Ciencia", "Entretenimiento", "Arte y Literatura", "Geografia"
 ]
 
+/* Variables para obtener el objeto dentro del array de preguntas */
 themes[0] = historia;
 themes[1] = naturaleza_y_ciencia;
 themes[2] = entretenimiento;
 themes[3] = arte_y_literatura;
 themes[4] = geografia;
 
+/* Funcion para obtener el id para cargar el titulo de la tematica */
 function getId(id) {
-    idBtnChoice = id
-    return { idBtnChoice }
-}
+    idBtnChoice = id;
+    return { idBtnChoice };
+};
 
+/* Funcion para dirigir la tematica y obtenga las preguntas/opciones */
 function loadQuestion(indexQuestion, i) {
-    DOMtitleQuiz.innerHTML = `Quiz de ${themesTitle[i]}`
-    clearInterval(count)
-    starTimer(15)
+    DOMtitleQuiz.innerHTML = `Quiz de ${themesTitle[i]}`;
+    clearInterval(count);
+    starTimer(15);
     question = themes[i][indexQuestion];
     for (let i = 0; i < 4; i++) {
         question.options.sort(() => Math.random() - 0.5);
@@ -140,16 +145,18 @@ function loadQuestion(indexQuestion, i) {
     DOMoption_3.innerHTML = question.options[2];
     DOMoption_4.innerHTML = question.options[3];
 
-    DOMcount.innerHTML = `Pregunta ${indexQuestion + 1} de ${themes[i].length}`
-}
+    DOMcount.innerHTML = `Pregunta ${indexQuestion + 1} de ${themes[i].length}`;
+};
 
+/* Eventos de los botones de opciones de respuesta */
 const DOMbtnsOptions = document.querySelectorAll('.option').forEach((btn) => {
     btn.addEventListener('click', e => {
-        idChoice = e.target.id
-        selectChoice(idChoice, `${idBtnChoice}`)
-    })
-})
+        idChoice = e.target.id;
+        selectChoice(idChoice, `${idBtnChoice}`);
+    });
+});
 
+/* Funcion para chequear la respuesta y setear el resultado */
 function selectChoice(idChoice, idBtnChoice) {
     clearInterval(count)
     let validate = question.options[idChoice] == question.answer;
@@ -158,30 +165,31 @@ function selectChoice(idChoice, idBtnChoice) {
     if (indexQuestion >= themes[idBtnChoice].length) {
         DOMshowQuiz.innerHTML = '';
         if (idBtnChoice == "0") {
-            if (userScore < users[5].score_historia) { infoResultScore(users[5].score_historia) } else if (users[5].score_historia == 0) { finishQuiz(idBtnChoice) } else { congratulations(idBtnChoice) }
+            if (userScore < users[5].score_historia) { infoResultScore(users[5].score_historia) } else if (users[5].score_historia == 0) { finishQuiz(idBtnChoice) } else { congratulations(idBtnChoice) };
         } else if (idBtnChoice == "1") {
-            if (userScore < users[5].score_naturaleza_y_ciencia) { infoResultScore(users[5].score_naturaleza_y_ciencia) } else if (users[5].score_naturaleza_y_ciencia == 0) { finishQuiz(idBtnChoice) } else { congratulations(idBtnChoice) }
+            if (userScore < users[5].score_naturaleza_y_ciencia) { infoResultScore(users[5].score_naturaleza_y_ciencia) } else if (users[5].score_naturaleza_y_ciencia == 0) { finishQuiz(idBtnChoice) } else { congratulations(idBtnChoice) };
         } else if (idBtnChoice == "2") {
-            if (userScore < users[5].score_entretenimiento) { infoResultScore(users[5].score_entretenimiento) } else if (users[5].score_entretenimiento == 0) { finishQuiz(idBtnChoice) } else { congratulations(idBtnChoice) }
+            if (userScore < users[5].score_entretenimiento) { infoResultScore(users[5].score_entretenimiento) } else if (users[5].score_entretenimiento == 0) { finishQuiz(idBtnChoice) } else { congratulations(idBtnChoice) };
         } else if (idBtnChoice == "3") {
-            if (userScore < users[5].score_arte_y_literatura) { infoResultScore(users[5].score_arte_y_literatura) } else if (users[5].score_arte_y_literatura == 0) { finishQuiz(idBtnChoice) } else { congratulations(idBtnChoice) }
+            if (userScore < users[5].score_arte_y_literatura) { infoResultScore(users[5].score_arte_y_literatura) } else if (users[5].score_arte_y_literatura == 0) { finishQuiz(idBtnChoice) } else { congratulations(idBtnChoice) };
         } else if (idBtnChoice == "4") {
-            if (userScore < users[5].score_geografia) { infoResultScore(users[5].score_geografia) } else if (users[5].score_geografia == 0) { finishQuiz(idBtnChoice) } else { congratulations(idBtnChoice) }
-        }
+            if (userScore < users[5].score_geografia) { infoResultScore(users[5].score_geografia) } else if (users[5].score_geografia == 0) { finishQuiz(idBtnChoice) } else { congratulations(idBtnChoice) };
+        };
     } else {
-        DOMcount.innerHTML = `Pregunta ${indexQuestion + 1} de ${themes[idBtnChoice].length}`
-        clearInterval(count)
-        starTimer(timeValue)
-        loadQuestion(indexQuestion, idBtnChoice)
-    }
-}
+        DOMcount.innerHTML = `Pregunta ${indexQuestion + 1} de ${themes[idBtnChoice].length}`;
+        clearInterval(count);
+        starTimer(timeValue);
+        loadQuestion(indexQuestion, idBtnChoice);
+    };
+};
 
+/* Funcion para mostrar la comparacion de resultados anteriores obtenidos con el actual*/
 function infoResultScore(LS_score) {
     Swal.fire(
         'Terminaste el Quiz',
         'Tu resultado no supera al anterior guardado, veamos!',
         'success'
-    )
+    );
     document.querySelector('.boxQuiz').classList.add('d-none');
     document.getElementById('info_score').innerHTML = `
             <div class="d-flex justify-content-center">        
@@ -206,14 +214,15 @@ function infoResultScore(LS_score) {
                 <button class="btn btn-info" type="button">Volver a jugar</button>
                 <button class="btn btn-danger" type="button">Salir</button>
             </div>
-            `
+            `;
     document.addEventListener('click', ((e) => {
         if (e.target && e.target.matches('button.btn')) {
             e.target.textContent == "Salir" ? location.assign('./home.html') : location.assign('./quiz_game.html');
-        }
-    }))
-}
+        };
+    }));
+};
 
+/* Funcion muestra mensaje cuando termina el quiz por primera vez */
 function finishQuiz(idBtnChoice) {
     Swal.fire({
         title: '<strong>TERMINASTE EL QUIZ!</strong>',
@@ -228,11 +237,12 @@ function finishQuiz(idBtnChoice) {
         focusConfirm: false,
         confirmButtonText:
             '<a class="links" href="ranking.html">Ver Ranking</a>',
-    })
-    setScoreLT(idBtnChoice)
-    setQuiz()
-}
+    });
+    setScoreLT(idBtnChoice);
+    setQuiz();
+};
 
+/* Funcion de mensaje al superar un resultado obtenido anteriormente */
 function congratulations(idBtnChoice) {
     Swal.fire({
         title: '<strong>Superaste tu puntaje anterior, felicitaciones!</strong>',
@@ -247,43 +257,48 @@ function congratulations(idBtnChoice) {
         focusConfirm: false,
         confirmButtonText:
             '<a class="links" href="ranking.html">Ver Ranking</a>',
-    })
-    setScoreLT(idBtnChoice);
-    setQuiz()
-}
+    });
+    setScoreLT(idBtnChoice);;
+    setQuiz();
+};
 
+/* Funcion para ir mostrando imagenes de correcta o incorrecta respuesta */
 function loadAnswer(bolean) {
     bolean == true ? (indicator = document.createElement('DIV'), indicator.classList.add('indice', 'true'), DOMscore.appendChild(indicator)) : (indicator = document.createElement('DIV'), indicator.classList.add('indice', 'false'), DOMscore.appendChild(indicator))
-}
+};
 
+/* Funcion para ir guardando las respuesta y su puntaje */
 function loadScore(dataChoice) {
     (dataChoice == true) ? ((userScore += 10), answerCorrect++) : answerWrong++;
-}
+};
 
+/* Funcion para setear los resultados en el LocalStorage segun la tematica que se esta jugando */
 function setScoreLT(idBtnChoice) {
     if (idBtnChoice == "0") {
-        users[5].score_historia = userScore
+        users[5].score_historia = userScore;
     } else if (idBtnChoice == "1") {
-        users[5].score_naturaleza_y_ciencia = userScore
+        users[5].score_naturaleza_y_ciencia = userScore;
     } else if (idBtnChoice == "2") {
-        users[5].score_entretenimiento = userScore
+        users[5].score_entretenimiento = userScore;
     } else if (idBtnChoice == "3") {
-        users[5].score_arte_y_literatura = userScore
+        users[5].score_arte_y_literatura = userScore;
     } else if (idBtnChoice == "4") {
-        users[5].score_geografia = userScore
-    }
-    localStorage.setItem('users', JSON.stringify(users))
-}
+        users[5].score_geografia = userScore;
+    };
+    localStorage.setItem('users', JSON.stringify(users));
+};
 
+/* Funcion de timer de tiempo por pregunta */
 function starTimer(timeValue) {
     count = setInterval(timer, 1000);
     function timer() {
         DOMtimerNumber.textContent = timeValue;
         timeValue--;
         timeValue < 0 && (clearInterval(count), selectChoice(5, idBtnChoice));
-    }
-}
+    };
+};
 
+/* Funcion para cuando terminas de jugar, setea o salis del juego segun eleccion */
 function setQuiz() {
     document.querySelector('.timer').classList.add('d-none');
     document.getElementById('count').setAttribute('class', 'd-none');
@@ -298,6 +313,6 @@ function setQuiz() {
     document.addEventListener('click', ((e) => {
         if (e.target && e.target.matches('button.btn')) {
             e.target.textContent == "Ir al HOME" ? location.assign('home.html') : location.assign('./quiz_game.html');
-        }
-    }))
-}
+        };
+    }));
+};

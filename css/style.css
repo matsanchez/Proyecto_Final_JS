@@ -7,6 +7,7 @@ body{
     position: relative;
     padding-bottom: 7rem;
     min-height: 100vh;
+    background-image: url(../img/bg4.jpg);
 }
 footer{
     position: absolute;
@@ -20,14 +21,10 @@ a{
 .links, link:hover{
     color: #ffffff;
 }
-body{
-    background-image: url(../img/bg4.jpg);
-}
 .bgHome_left{
     background-image: url(../img/bg-home.jpg);
     background-position: center center;
     background-size: contain;
-    background-repeat: no-repeat;
 }
 .bgHome_right{
     background: #ffe259;
@@ -49,7 +46,7 @@ hr{
 }
 .imgProductsCart{
     width: 100px;
-    border-radius: 30%;
+    height: 100px;
 }
 .iconCart{
     width: 40px;
@@ -69,10 +66,6 @@ hr{
     border-radius: 50%;
     text-align: center;
 }
-.cartTitle{
-    text-align: center;
-    padding: 1px;
-}
 @media (max-width:767px) {
     .menu-center img{
         width: 130px;
@@ -84,21 +77,26 @@ hr{
 .container__btnItem{
     display: flex;
     flex-flow: row;
-    justify-content: space-evenly;
-    align-items: center;
-    position: relative;
+    justify-content: center;
     font-size: 1rem;
 }
 .container__btnItem i{
     font-size: 1.2rem;
 }
 .container__btnItem p{
-    margin-top: 25px;
+    margin-top: 20px;
 }
 .__btnItem{
     border-radius: 50%;
     width: 20px;
     height: 20px;
+}
+.text_price_unit, .text_unit_stock{
+    font-size: 0.7rem;
+}
+.btn_shop_cart{
+    margin: 5px;
+    width: 200px;
 }
 /* ///////////////////////////////////////////// */
 /* ESTILOS SECTION QUESTIONS */
@@ -267,32 +265,6 @@ hr{
     box-shadow: #000 2px 2px 2px 2px;
     padding: 15px;
 }
-@media (max-width:767px) {
-    .btn_memory{
-        width: 90px;
-        height: 90px;
-    }
-    .bg_card_memory{
-        background-size: contain;
-    }
-    .cards_game_memory{
-        width: 80px;
-        height: 80px;
-    }
-}
-@media (max-width:477px) {
-    .btn_memory{
-        width: 80px;
-        height: 80px;
-    }
-    .bg_card_memory{
-        background-size: contain;
-    }
-    .cards_game_memory{
-        width: 70px;
-        height: 70px;
-    }
-}
 #time_left, #hits, #movements, .title_memory{
     background-color: #FFF;
     margin: 3px;
@@ -328,7 +300,7 @@ hr{
 /* JUEGO DEL AHORCADO */
 /* ///////////////////////////////////////////////////// */
 #game_hanged{
-    width: 75%;
+    width: 80%;
     margin: auto;
     padding: 5px;
     display: flex;
@@ -349,8 +321,9 @@ hr{
     border-radius: 50%;
 }
 #letter_guess{
-    font-size: 2rem;
-    height: 3rem;
+    margin-top: 12px;
+    font-size: 1.5rem;
+    height: 2rem;
 }
 #letter_guess span{
     vertical-align: bottom;
@@ -373,4 +346,62 @@ hr{
 .letter_correct, .letter_correct{
     width: 40px;
     height: 40px;
+}
+/* ///////////////////////////////////////////////////// */
+/* Media Squerie */
+/* ///////////////////////////////////////////////////// */
+@media (max-width:767px) {
+    .btn_memory{
+        width: 90px;
+        height: 90px;
+    }
+    .bg_card_memory{
+        background-size: contain;
+    }
+    .cards_game_memory{
+        width: 80px;
+        height: 80px;
+    }
+    .imgProductsCart{
+        width: 50px;
+    }
+    #game_hanged{
+        width: 80%;
+        margin: auto;
+        padding: 5px;
+        display: flex;
+        flex-flow: column;
+        gap: 10px;
+    }
+    #hanged_img{
+        width: 100px;
+        height: 100px;
+    }
+    #letter_guess span{
+        vertical-align: bottom;
+        border-bottom: 2px solid #000;
+        width: 20px;
+        text-align: center;
+        margin-right: 6px;
+        display: inline-block;
+    }
+}
+@media (max-width:477px) {
+    .btn_memory{
+        width: 80px;
+        height: 80px;
+    }
+    .bg_card_memory{
+        background-size: contain;
+    }
+    .cards_game_memory{
+        width: 70px;
+        height: 70px;
+    }
+    .timerText{
+        font-size: 0.7rem;
+    }
+    #btnBuy{
+        margin-bottom: 50px;
+    }
 }

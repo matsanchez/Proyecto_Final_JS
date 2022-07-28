@@ -1,8 +1,4 @@
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let users = JSON.parse(localStorage.getItem('users')) || [];
-
-const DOMuser_login = document.getElementById('user_login').innerHTML = `Hola ${users[5].name} 😃`
-const DOMcartCounter = document.getElementById('cartCounter');
+/* Botones de los juegos */
 const DOMbtn_quiz_game = document.getElementById('quiz_game').addEventListener('click', e => {
     window.open('quiz_game.html', '_self');
 })
@@ -15,15 +11,14 @@ const DOMbtn_hanged_game = document.getElementById('hanged_game').addEventListen
 
 fetchData();
 
-cart.length === 0 ? DOMcartCounter.innerHTML = cart.length + 0 : DOMcartCounter.innerHTML = cart.length;
-
+/* Funcion donde obtengo la REST Api de mis productos */
 function fetchData() {
     fetch('../js/shop_cart/products.json')
         .then(function (res) {
             return res.json();
         })
         .then(function (data) {
-            productsArray = data
+            productsArray = data;
             let card = '';
             data.forEach(function (products) {
                 card += `
@@ -37,44 +32,72 @@ function fetchData() {
                               <p class="text-center h5">$${products.price}</p>
                               <div class="text-center"><button id=${products.id} class="btn btn-warning">Agregar al Carrito</button></div>
                               </div>
+                              <p class="fs-6 text-muted text-center">${products.stock} Unidades Disponibles</p>
                           </div>
                       </div>
                   </li>
             `
             });
-            const containerProduct = document.getElementById('containerProduct')
-            containerProduct.innerHTML = card
+            const containerProduct = document.getElementById('containerProduct');
+            containerProduct.innerHTML = card;
         })
         .catch(function (error) {
-            document.write("Error en los servidores")
-        })
-}
+            location.assign('404.html');
+        });
+};
 
+/* Botones Agregar Carrito */
 document.addEventListener("click", (e) => {
     if (e.target && e.target.matches("button.btn")) {
         addCart(e.target.id);
-    }
-})
+    };
+});
 
+/* Funcion para agregar los productos al carrito */
 function addCart(e) {
-    const idFound = productsArray.find(prod => prod.id == e)
-    const inCart = cart.find(prod => prod.id == idFound.id)
+    idFound = productsArray.find(prod => prod.id == e);
+    inCart = cart.find(prod => prod.id == idFound.id);
     if (!inCart) {
-        cart.push({ ...idFound, cantidad: 1 })
+        cart.push({ ...idFound, cantidad: 1 });
+        checkStock();
     } else {
-        let cartFilter = cart.filter(id => id.id != inCart.id)
-        cart = [...cartFilter, { ...inCart, cantidad: inCart.cantidad + 1 }]
-    }
+        let cartFilter = cart.filter(id => id.id != inCart.id);
+        if (inCart.cantidad != inCart.stock) {
+            cart = [...cartFilter, { ...inCart, cantidad: inCart.cantidad + 1 }];
+            checkStock();
+        } else
+            outStock();
+    };
+};
+
+/* Funcion para verificar si hay Stock de los productos */
+function checkStock() {
     localStorage.setItem('cart', JSON.stringify(cart));
-    DOMcartCounter.innerHTML = cart.length
+    counterQuantity();/* Llamo a funcion contador de productos en carrito */
     Swal.fire({
         position: 'top-end',
         icon: 'success',
-        title: 'Producto agregado al carrito',
+        title: `Se añadio ${idFound.name} al carrito`,
         showConfirmButton: false,
         "toast": true,
         "background": "#fff",
         "color": "#000",
-        timer: 1000
-    })
-}
+        timer: 1500
+    });
+};
+
+/* Funcion mensaje cuando no haya mas Stock */
+function outStock() {
+    Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: `Disculpe, no hay mas stock de ${idFound.name}`,
+        showConfirmButton: false,
+        "toast": true,
+        "background": "#fff",
+        "color": "#000",
+        timer: 1500
+    });
+};
+
+
