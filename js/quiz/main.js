@@ -210,9 +210,9 @@ function infoResultScore(LS_score) {
                         </div>
                     </div>
             </div>
-            <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-info" type="button">Volver a jugar</button>
-                <button class="btn btn-danger" type="button">Salir</button>
+            <div class="text-center mb-5">
+                <button class="btn btn-info btn_shop_cart" type="button">Volver a jugar</button>
+                <button class="btn btn-danger btn_shop_cart" type="button">Salir</button>
             </div>
             `;
     document.addEventListener('click', ((e) => {

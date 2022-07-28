@@ -404,4 +404,7 @@ hr{
     #btnBuy{
         margin-bottom: 50px;
     }
+    .disguise_table{
+        display: none;
+    }
 }
