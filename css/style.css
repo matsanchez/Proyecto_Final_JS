@@ -22,9 +22,9 @@ a{
     color: #ffffff;
 }
 .bgHome_left{
-    background-image: url(../img/bg-home.jpg);
+    background-image: url(../img/bg-home.png);
     background-position: center center;
-    background-size: contain;
+    background-size: cover;
 }
 .bgHome_right{
     background: #ffe259;
